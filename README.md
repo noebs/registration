@@ -1,4 +1,12 @@
-# Getting Started with Create React App
+# noebs registration
+
+
+Registration webside for noebs and Solus merchants. You can view the (page at)[https://new.cashq.app]. The goal of this is to allow us to register as many merchants as possible.
+
+
+
+
+#### Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
