@@ -12,6 +12,11 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import { withStyles } from "@material-ui/core/styles";
+import {LanguageIcon} from "./icons.js"
+
+import i18n from "./i18n";
+import i18next from 'i18next';
+
 
 
 function Copyright() {
@@ -96,14 +101,30 @@ class App extends React.Component {
     event.preventDefault();
   }
 
+
+
   render() {
    
     const { classes } = this.props;
+   
     return (
+
 
         <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
+      {/* <button
+       
+        onClick={() => this.toggleLanguage(i18n.language)}
+      >
+        <div>
+          <LanguageIcon language={i18n.language} />
+        </div>
+
+        <div className="font-bold text-lg">
+          {i18n.language === "en" ? "English" : "عربي"}
+        </div> 
+      </button>*/}
         <Avatar className={classes.avatar}>
           <LockOutlinedIcon />
         </Avatar>
@@ -120,7 +141,7 @@ class App extends React.Component {
                 required
                 fullWidth
                 id="fullname"
-                label="Full Name"
+                label={i18n.t("name")}
                 autoFocus
               />
             </Grid>
@@ -130,7 +151,7 @@ class App extends React.Component {
                 required
                 fullWidth
                 id="mobile"
-                label="Mobile number (09xx|01xx)"
+                label={i18n.t("mobile")}
                 name="mobile"
                 autoComplete="lname"
               />
@@ -141,7 +162,7 @@ class App extends React.Component {
                 required
                 fullWidth
                 id="idType"
-                label="ID type"
+                label={i18n.t("id")}
                 name="id_type"
                 autoComplete="idType"
               />
@@ -152,7 +173,7 @@ class App extends React.Component {
                 required
                 fullWidth
                 id="idNo"
-                label="ID number"
+                label={i18n.t("id_number")}
                 name="id_no"
                 autoComplete="lname"
               />
@@ -163,7 +184,7 @@ class App extends React.Component {
                 required
                 fullWidth
                 id="city"
-                label="City / address"
+                label={i18n.t("city")}
                 name="city"
                 autoComplete="city"
               />
@@ -174,7 +195,7 @@ class App extends React.Component {
                 required
                 fullWidth
                 name="password"
-                label="Password"
+                label={i18n.t("password")}
                 type="password"
                 id="password"
                 autoComplete="current-password"
@@ -183,7 +204,7 @@ class App extends React.Component {
             <Grid item xs={12}>
               <FormControlLabel
                 control={<Checkbox value="allowExtraEmails" color="primary" />}
-                label="I want to receive marketing and promotional materisals"
+                label={i18n.t("marketing")}
               />
             </Grid>
           </Grid>
@@ -194,12 +215,12 @@ class App extends React.Component {
             color="primary"
             className={classes.submit}
           >
-            Sign Up
+            {i18n.t("submit")}
           </Button>
           <Grid container justify="flex-end">
             <Grid item>
               <Link href="#" variant="body2">
-                Already have an account? Sign in
+                {i18n.t("sign_in")}
               </Link>
             </Grid>
           </Grid>
