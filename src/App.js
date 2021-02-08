@@ -12,10 +12,8 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import { withStyles } from "@material-ui/core/styles";
-import {LanguageIcon} from "./icons.js"
 
 import i18n from "./i18n";
-import i18next from 'i18next';
 
 
 

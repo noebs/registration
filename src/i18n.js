@@ -15,7 +15,8 @@ const resources = {
       "password": "Password",
       "submit": "Submit",
       "tm": "Noebs and Solus are registered trademarks. Solus is a certified payment processor by CBOS.",
-      "sign_in": "Already have an account? Sign in"
+      "sign_in": "Already have an account? Sign in",
+      "marketing": "Do you want to receive marketing and promotional materials?"
     
     }
   },
@@ -30,7 +31,9 @@ const resources = {
       "password": "كلمة السر",
       "submit": "ارسال",
       "tm": "Noebs and Solus are registered trademarks. Solus is a certified payment processor by CBOS.",
-      "sign_in": "لديك حساب مسبقاً؟ تسجيل الدخول"
+      "sign_in": "لديك حساب مسبقاً؟ تسجيل الدخول",
+      "marketing": "هل تود استقبال رسائل تسويقية؟"
+
 
     }
   }
