@@ -33,8 +33,6 @@ const resources = {
       "tm": "Noebs and Solus are registered trademarks. Solus is a certified payment processor by CBOS.",
       "sign_in": "لديك حساب مسبقاً؟ تسجيل الدخول",
       "marketing": "هل تود استقبال رسائل تسويقية؟"
-
-
     }
   }
 };
