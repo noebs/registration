@@ -14,6 +14,9 @@ import Container from '@material-ui/core/Container';
 import { withStyles } from "@material-ui/core/styles";
 
 import i18n from "./i18n";
+import { Alert } from '@material-ui/lab';
+import { IconButton, Snackbar } from '@material-ui/core';
+import CloseIcon from '@material-ui/icons/Close';
 
 
 
@@ -60,7 +63,7 @@ class App extends React.Component {
     super(props);
     this.state = {
 
-      success: false, error: false, message: "",
+      success: false, error: false, message: "",open: false,
       name: '', password: "", mobile: "", id_no: "", id_type: 0, city: "", url: ""
     };
   }
@@ -70,32 +73,37 @@ class App extends React.Component {
     this.setState({ [event.target.name]: event.target.value });
   }
 
+  handleClose = () => {
+    this.setState({ open: false });
+  }
+
+   handleOpen = ()=>  {
+    this.setState({ open: true });
+  }
+
   handleID = (event) => {
     this.setState({ id_type: 1 })
   }
 
   handleSubmit = (event) => {
     this.setState({ id_type: 1 });
-    fetch('https://beta.soluspay.net/api/merchant/new', {
-      method: 'POST',
+    console.log(this.state)
+    fetch('https://api.soluspay.net/api/merchant/new', {
+      method: 'POST', headers:{"content-type": "application/json"},
       // We convert the React state to JSON and send it as the POST body
 
       body: JSON.stringify(this.state)
     }).then((response) => {
       if (!response.ok) {
-        // return response.then(Promise.reject.bind(Promise))
-        throw response;
+        if (response.status === 400) {
+           response.json().then(data => this.setState({open: true, error: true, message: data["message"]}));
+        }else{
+           response.json().then(data => this.setState({open: true, error: true, message: "generic_err"}));
+        }
+      }else{
+        response.json().then(data => this.setState({ success: true, message: "Successful", url: data["url"] }));
       }
-      return response.json();
     })
-      .then((data) => {
-        this.setState({ success: true, message: "Successful", url: data["url"] })
-      })
-      .catch(error => {
-        console.log('error: ' + error);
-        this.setState({ error: true, message: error, })
-      });
-
     event.preventDefault();
   }
 
@@ -105,10 +113,32 @@ class App extends React.Component {
    
     const { classes } = this.props;
    
-    return (
-
+    return(
 
         <Container component="main" maxWidth="xs">
+                  <div>
+         
+         <Snackbar
+           anchorOrigin={{
+             vertical: 'bottom',
+             horizontal: 'left',
+           }}
+           open={this.state.open}
+           autoHideDuration={6000}
+           onClose={this.handleClose}
+           message={this.state.message}
+           action={
+             <React.Fragment>
+               <Button color="secondary" size="small" onClick={this.handleClose}>
+                 UNDO
+               </Button>
+               <IconButton size="small" aria-label="close" color="inherit" onClick={this.handleClose}>
+                 <CloseIcon fontSize="small" />
+               </IconButton>
+             </React.Fragment>
+           }
+         />
+       </div>
       <CssBaseline />
       <div className={classes.paper}>
       {/* <button
@@ -123,6 +153,9 @@ class App extends React.Component {
           {i18n.language === "en" ? "English" : "عربي"}
         </div> 
       </button>*/}
+      {/* {this.state.error && <Alert severity="error">{this.state.message}</Alert>} */}
+      
+      {this.state.success && <Alert severity="error">{this.state.url}</Alert>}
         <Avatar className={classes.avatar}>
           <LockOutlinedIcon />
         </Avatar>
@@ -141,11 +174,13 @@ class App extends React.Component {
                 id="fullname"
                 label={i18n.t("name")}
                 autoFocus
+                onChange={this.handleChange}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
               <TextField
                 variant="outlined"
+                onChange={this.handleChange}
                 required
                 fullWidth
                 id="mobile"
@@ -163,6 +198,7 @@ class App extends React.Component {
                 label={i18n.t("id")}
                 name="id_type"
                 autoComplete="idType"
+                onChange={this.handleChange}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -174,6 +210,7 @@ class App extends React.Component {
                 label={i18n.t("id_number")}
                 name="id_no"
                 autoComplete="lname"
+                onChange={this.handleChange}
               />
             </Grid>
             <Grid item xs={12}>
@@ -185,6 +222,7 @@ class App extends React.Component {
                 label={i18n.t("city")}
                 name="city"
                 autoComplete="city"
+                onChange={this.handleChange}
               />
             </Grid>
             <Grid item xs={12}>
@@ -197,6 +235,20 @@ class App extends React.Component {
                 type="password"
                 id="password"
                 autoComplete="current-password"
+                onChange={this.handleChange}
+              />
+            </Grid>
+                     <Grid item xs={12}>
+              <TextField
+                variant="outlined"
+                required
+                fullWidth
+                name="card"
+                label={i18n.t("pan")}
+                type="pan"
+                id="pan"
+                autoComplete="current-pan"
+                onChange={this.handleChange}
               />
             </Grid>
             <Grid item xs={12}>
@@ -227,9 +279,6 @@ class App extends React.Component {
       <Box mt={5}>
         <Copyright />
       </Box>
-      {this.state.success && "The success is: " + this.state.url}
-
-    {this.state.error && "The error is: " + this.state.message}
     </Container>
 
     );
