@@ -19,6 +19,8 @@ import { IconButton, Snackbar } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
 import QRCode from 'react-qr-code';
 import { CheckCircle, GetApp } from '@material-ui/icons';
+import {isMobile} from 'react-device-detect';
+
 
 function Copyright() {
   return (
@@ -61,7 +63,7 @@ class App extends React.Component {
     super(props);
     this.state = {
 
-      success: false, error: false, message: "", open: false,
+      success: false, error: false, message: "", open: false, billerName: "",
       name: '', password: "", mobile: "", id_no: "", id_type: 1, city: "", url: "", canSubmit: true,
     };
   }
@@ -101,7 +103,7 @@ class App extends React.Component {
           response.json().then(data => this.setState({ open: true, error: true, message: "generic_err" }));
         }
       } else {
-        response.json().then(data => this.setState({ success: true, message: "Successful", url: JSON.stringify(data) }));
+        response.json().then(data => this.setState({ success: true, message: "Successful", url: JSON.stringify(data), billerName: data["biller_name"] }));
       }
     })
     event.preventDefault();
@@ -128,7 +130,7 @@ class App extends React.Component {
             </Typography>
           </div>
 
-          {this.state.success && <QRCode value={this.state.url} />}
+          {this.state.success && isMobile? <QRCode value={this.state.url} />: <p>Save this ID: {this.state.billerName}</p>}
           <IconButton href="https://play.google.com/store/apps/details?id=net.soluspay.CashQMerchant" color="primary">
             <GetApp/>
             
