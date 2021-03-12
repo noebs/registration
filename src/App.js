@@ -70,7 +70,9 @@ class App extends React.Component {
 
 
   handleChange = (event) => {
-    this.setState({ [event.target.name]: event.target.value });
+
+    // e.target.type === 'number' ? parseInt(e.target.value) : e.target.value
+    this.setState({ [event.target.name]: event.target.type  === "number" ? parseInt(event.target.value): event.target.value });
   }
 
   handleClose = () => {
@@ -202,6 +204,7 @@ class App extends React.Component {
               <Grid item xs={12} sm={6}>
                 <TextField
                   variant="outlined"
+                  type="number"
                   required
                   fullWidth
                   id="idType"
@@ -251,7 +254,6 @@ class App extends React.Component {
               <Grid item xs={12}>
                 <TextField
                   variant="outlined"
-                  required
                   fullWidth
                   name="card"
                   label={i18n.t("pan")}
