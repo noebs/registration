@@ -24,8 +24,8 @@ function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {'Copyright © '}
-      <Link color="inherit" href="https://noebs.dev">
-        Noebs: Payment Simplified.
+      <Link color="inherit" href="https://soluspay.net">
+        {i18n.t("company")}
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -117,14 +117,14 @@ class App extends React.Component {
 
       <Container component="main" maxWidth="xs">
 
-        <div >
-          <div className={classes.paper}  style={{ display: !this.state.success && "none" }} >
+        <div style={{ display: !this.state.success && "none" }} >
+          <div className={classes.paper}   >
 
             <Avatar className={classes.avatar}>
               <CheckCircle />
             </Avatar>
             <Typography variant="h6">
-              Registration Completed. Congrats! We will follow up with you to complete installation steps.
+              {i18n.t("registration_message")}
             </Typography>
           </div>
 
@@ -132,13 +132,10 @@ class App extends React.Component {
           <IconButton href="https://play.google.com/store/apps/details?id=net.soluspay.CashQMerchant" color="primary">
             <GetApp/>
             
-              <p style={{fontSize: 12}}>Download Cashq Merchant To Complete Registration</p>
+              <p style={{fontSize: 12}}>{i18n.t("cashq_prompt")}</p>
            
         </IconButton>
         </div>
-
-
-
         <div>
           <Snackbar
             anchorOrigin={{
@@ -152,7 +149,7 @@ class App extends React.Component {
             action={
               <React.Fragment>
                 <Button color="secondary" size="small" onClick={this.handleClose}>
-                  UNDO
+                 <p> {i18n.t("close")}</p>
                </Button>
                 <IconButton size="small" aria-label="close" color="inherit" onClick={this.handleClose}>
                   <CloseIcon fontSize="small" />
@@ -171,7 +168,7 @@ class App extends React.Component {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign up for noebs
+            {i18n.t("signup")}
         </Typography>
           <form className={classes.form} noValidate onSubmit={this.handleSubmit}>
             <Grid container spacing={2}>

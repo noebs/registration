@@ -17,7 +17,11 @@ const resources = {
       "submit": "Submit",
       "tm": "Noebs and Solus are registered trademarks. Solus is a certified payment processor by CBOS.",
       "sign_in": "Already have an account? Sign in",
-      "marketing": "Do you want to receive marketing and promotional materials?"
+      "marketing": "Do you want to receive marketing and promotional materials?",
+      "registration_message": "Registration Completed. Congrats! We will follow up with you to complete installation steps.",
+      "cashq_prompt": "Download Cashq Merchant To Complete Registration",
+      "signup": "Register as Merchant",
+      "company": "Cashq | SolusPay"
     
     }
   },
@@ -34,7 +38,11 @@ const resources = {
       "submit": "ارسال",
       "tm": "Noebs and Solus are registered trademarks. Solus is a certified payment processor by CBOS.",
       "sign_in": "لديك حساب مسبقاً؟ تسجيل الدخول",
-      "marketing": "هل تود استقبال رسائل تسويقية؟"
+      "marketing": "هل تود استقبال رسائل تسويقية؟",
+      "registration_message": "تم التسجيل بنجاح. قم بتنزيل Cashq لإتمام عملية التسجيل!",
+      "cashq_prompt": "قم بتحميل تطبيق التاجر ل Cashq",
+      "signup": "قم بالتسجيل",
+      "company": "Cashq | SolusPay"
     }
   }
 };
