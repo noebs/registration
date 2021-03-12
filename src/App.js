@@ -20,20 +20,6 @@ import CloseIcon from '@material-ui/icons/Close';
 import QRCode from 'react-qr-code';
 import { CheckCircle, GetApp } from '@material-ui/icons';
 
-const Result = (data) => {
-
-  <Container component="main" maxWidth="xs">
-    <div>
-      <QRCode value={data} />
-      <Button href="https://play.google.com/store/apps/details?id=net.soluspay.CashQMerchant" color="primary">
-        Link
-</Button>
-    </div>
-  </Container>
-
-}
-
-
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
@@ -76,7 +62,7 @@ class App extends React.Component {
     this.state = {
 
       success: false, error: false, message: "", open: false,
-      name: '', password: "", mobile: "", id_no: "", id_type: 0, city: "", url: ""
+      name: '', password: "", mobile: "", id_no: "", id_type: 1, city: "", url: "", canSubmit: true,
     };
   }
 
@@ -99,6 +85,7 @@ class App extends React.Component {
 
   handleSubmit = (event) => {
     this.setState({ id_type: 1 });
+    this.setState({canSubmit: false});
     console.log(this.state)
     fetch('https://api.soluspay.net/api/merchant/new', {
       method: 'POST', headers: { "content-type": "application/json" },
@@ -106,6 +93,7 @@ class App extends React.Component {
 
       body: JSON.stringify(this.state)
     }).then((response) => {
+      this.setState({canSubmit: true})
       if (!response.ok) {
         if (response.status === 400) {
           response.json().then(data => this.setState({ open: true, error: true, message: data["message"] }));
@@ -283,6 +271,7 @@ class App extends React.Component {
             </Grid>
             <Button
               type="submit"
+              disabled={!this.state.canSubmit}
               fullWidth
               variant="contained"
               color="primary"
